@@ -1,24 +1,24 @@
-import { AiOutlineLoading } from "react-icons/ai";
-import { toast } from "react-toastify";
-import { useState, useEffect } from "react";
+import { AiOutlineLoading } from 'react-icons/ai';
+import { toast } from 'react-toastify';
+import { useState, useEffect } from 'react';
 
-import { type StripePaymentElementOptions } from "@stripe/stripe-js";
+import { type StripePaymentElementOptions } from '@stripe/stripe-js';
 import {
   PaymentElement,
   useStripe,
   useElements,
-} from "@stripe/react-stripe-js";
+} from '@stripe/react-stripe-js';
 
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from '@/context/AuthContext';
 
-import UserAddress from "../Home/Profile/UserAddress";
+import AddressDisplay from './AddressDisplay';
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
 
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function CheckoutForm() {
     }
 
     const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
+      'payment_intent_client_secret'
     );
 
     if (!clientSecret) {
@@ -36,17 +36,17 @@ export default function CheckoutForm() {
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent?.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
+        case 'succeeded':
+          setMessage('Payment succeeded!');
           break;
-        case "processing":
-          setMessage("Your payment is processing.");
+        case 'processing':
+          setMessage('Your payment is processing.');
           break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
+        case 'requires_payment_method':
+          setMessage('Your payment was not successful, please try again.');
           break;
         default:
-          setMessage("Something went wrong.");
+          setMessage('Something went wrong.');
           break;
       }
     });
@@ -56,7 +56,7 @@ export default function CheckoutForm() {
     e.preventDefault();
 
     if (!user?.address) {
-      return toast.error("You need to set an address first.");
+      return toast.error('You need to set an address first.');
     }
 
     if (!stripe || !elements) {
@@ -74,18 +74,18 @@ export default function CheckoutForm() {
       },
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
+    if (error.type === 'card_error' || error.type === 'validation_error') {
       setMessage(error.message as string);
       toast.error(message);
     } else {
-      setMessage("An unexpected error occurred.");
+      setMessage('An unexpected error occurred.');
     }
 
     setIsLoading(false);
   };
 
   const paymentElementOptions: StripePaymentElementOptions = {
-    layout: "tabs",
+    layout: 'tabs',
   };
 
   return (
@@ -95,7 +95,7 @@ export default function CheckoutForm() {
       className="max-h-[600px] p-1 scrollbar-cart overflow-y-auto"
     >
       <div className="flex flex-col gap-2">
-        <UserAddress
+        <AddressDisplay
           fullName={user?.address?.fullName as string}
           contactNumber={user?.address?.contactNumber as string}
           country={user?.address?.country as string}

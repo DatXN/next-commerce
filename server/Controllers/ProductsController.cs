@@ -23,6 +23,7 @@ public class ProductsController : BaseController
     }
 
     [AllowAnonymous] // api/products/
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts(
         [FromQuery] string? sort,
         [FromQuery] string? category,

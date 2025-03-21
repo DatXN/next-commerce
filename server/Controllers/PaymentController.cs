@@ -1,8 +1,8 @@
 using server.Data;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-
 using Stripe;
+using server.DTOs;
 
 namespace server.Controllers;
 
@@ -38,7 +38,7 @@ public class PaymentController : BaseController
         return new JsonResult(new { clientSecret = paymentIntent.ClientSecret });
     }
 
-    private long CalculateOrderAmount(IEnumerable<Product> items)
+    private long CalculateOrderAmount(IEnumerable<PaymentProductDTO> items)
     {
         long result = 0;
 
@@ -72,35 +72,5 @@ public class PaymentController : BaseController
         }
 
         return result;
-    }
-
-    public class Product
-    {
-        [JsonProperty("productId")]
-        public int ProductId { get; set; }
-
-        [JsonProperty("brand")]
-        public string Brand { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("price")]
-        public decimal Price { get; set; }
-
-        [JsonProperty("quantity")]
-        public int Quantity { get; set; }
-
-        [JsonProperty("color")]
-        public string? Color { get; set; }
-
-        [JsonProperty("size")]
-        public string? Size { get; set; }
-    }
-
-    public class PaymentIntentCreateRequest
-    {
-        [JsonProperty("products")]
-        public Product[] Products { get; set; }
     }
 }

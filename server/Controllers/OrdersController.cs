@@ -28,6 +28,7 @@ public class OrdersController : BaseController
 
     // api/orders/
     [Authorize(Roles = "ADMIN")]
+    [HttpGet]
     public async Task<ActionResult> GetOrders(
         [FromQuery] int? orderId,
         [FromQuery] string? sort,
