@@ -163,7 +163,7 @@ export default function MobileCategories({
                     {({ open }: { open: boolean }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between py-2 text-left">
-                          <span className="text-sm font-medium text-gray-900">
+                          <span className="text-sm font-bold text-gray-900">
                             {category.name}
                           </span>
                           <ChevronDownIcon
