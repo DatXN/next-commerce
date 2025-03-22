@@ -1,3 +1,34 @@
+# Dat.XN installation
+
+1. Setup postgres with docker compose
+   ```
+   cd docker-compose.yml
+   docker-compose -f docker-compose.yml up -d
+   ```
+   Note
+   - Access the pgAdmin at: http://localhost:15432
+   - Connect to db from pgAdmin with server name = postgres (the node name)
+   - but connect from server is localhost
+   - create db first with postgres as owner
+
+2. Make sure install .net 8
+3. Run server
+4. Web
+   1. Add .env file
+  ```
+  NEXT_PUBLIC_BASE_URL=http://localhost:5010/
+  NEXT_PUBLIC_API_URL=http://localhost:5009/api
+  NEXT_PUBLIC_TOKEN_SECRET=THERE IS NO KEY HERE JUST FEW RANDOM WORDS TO MAKE THE KEY HAS 512 BITS
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=SECRET
+  ```
+1. Run web
+   ```
+   cd /Users/datnguyen/Documents/DEV/lab/next-commerce/client
+   npm run dev
+   ```
+2. Register (use website) admin account + go to db set admin role
+
+
 <ul align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="client\public\github-images\logo-dark.png">
