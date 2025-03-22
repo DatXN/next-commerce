@@ -112,3 +112,8 @@ input[type="number"] {
 .commerce-button:hover {
   background-color: rgb(240, 240, 240);
 }
+
+.dim-main {
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease-in-out;
+}

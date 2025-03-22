@@ -19,12 +19,14 @@ const categories = [
     featured: [
       {
         name: 'Best Selling Multivitamins',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Best Selling Multivitamins',
       },
       {
         name: 'Vitamin D3 5000 IU',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Vitamin D3',
       },
     ],
@@ -41,12 +43,14 @@ const categories = [
     featured: [
       {
         name: 'Natural Skincare',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Natural Skincare',
       },
       {
         name: 'Organic Hair Care',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Organic Hair Care',
       },
     ],
@@ -66,12 +70,14 @@ const categories = [
     featured: [
       {
         name: 'Whey Protein',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Whey Protein',
       },
       {
         name: 'BCAA Supplements',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=BCAA',
       },
     ],
@@ -91,12 +97,14 @@ const categories = [
     featured: [
       {
         name: 'Herbal Teas',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Herbal Teas',
       },
       {
         name: 'Essential Oils',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Essential Oils',
       },
     ],
@@ -116,12 +124,14 @@ const categories = [
     featured: [
       {
         name: 'Natural Body Care',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Natural Body Care',
       },
       {
         name: 'Organic Bath Products',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Organic Bath',
       },
     ],
@@ -138,12 +148,14 @@ const categories = [
     featured: [
       {
         name: 'Organic Snacks',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Organic Snacks',
       },
       {
         name: 'Superfood Powders',
-        image: 'https://placehold.co/300x200',
+        image:
+          'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=200&fit=crop',
         href: '/products?category=Superfood Powders',
       },
     ],
@@ -162,9 +174,15 @@ export default function Categories() {
           {categories.map((category) => (
             <li
               key={category.name}
-              className="relative group"
-              onMouseEnter={() => setActiveCategory(category.name)}
-              onMouseLeave={() => setActiveCategory(null)}
+              className="relative"
+              onMouseEnter={() => {
+                setActiveCategory(category.name);
+                document.querySelector('main')?.classList.add('dim-main');
+              }}
+              onMouseLeave={() => {
+                setActiveCategory(null);
+                document.querySelector('main')?.classList.remove('dim-main');
+              }}
             >
               <button className="px-4 py-3 text-sm font-medium text-gray-700 hover:text-green-600">
                 {category.name}
@@ -172,7 +190,19 @@ export default function Categories() {
 
               {/* Mega Menu */}
               {activeCategory === category.name && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[150px] w-[98vw] max-w-[98vw] bg-white border border-gray-200 shadow-lg rounded-lg z-[100]">
+                <div
+                  className="fixed left-1/2 -translate-x-1/2 top-[150px] w-[98vw] max-w-[98vw] bg-white border border-gray-200 shadow-lg rounded-lg z-[100]"
+                  onMouseEnter={() => {
+                    setActiveCategory(category.name);
+                    document.querySelector('main')?.classList.add('dim-main');
+                  }}
+                  onMouseLeave={() => {
+                    setActiveCategory(null);
+                    document
+                      .querySelector('main')
+                      ?.classList.remove('dim-main');
+                  }}
+                >
                   <div className="container mx-auto px-4 py-8">
                     <div className="grid grid-cols-12 gap-8">
                       {/* Subcategories */}
@@ -216,6 +246,8 @@ export default function Categories() {
                                     src={item.image}
                                     alt={item.name}
                                     className="object-cover transition-transform group-hover:scale-105"
+                                    placeholder="blur"
+                                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAyVC08MTY3LjIyOUFTRjo/Tj4yMkhiSk46NjVBWlFOTU5BQUFBQUH/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAb/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                                   />
                                 </div>
                                 <p className="text-sm text-gray-600 group-hover:text-green-600">
