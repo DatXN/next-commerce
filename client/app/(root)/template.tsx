@@ -1,9 +1,11 @@
-import { ToastContainer } from "react-toastify";
+'use client';
 
-import Footer from "@/components/Home/Layout/Footer";
-import Navbar from "@/components/Home/Layout/Navbar";
-import MobileNav from "@/components/Home/Layout/Navbar/Mobile";
-import ScrollUp from "@/components/Home/Layout/ScrollUp";
+import { ToastContainer } from 'react-toastify';
+
+import Footer from '@/components/Home/Layout/Footer';
+import Navbar from '@/components/Home/Layout/Navbar';
+import MobileNav from '@/components/Home/Layout/Navbar/Mobile';
+import ScrollUp from '@/components/Home/Layout/ScrollUp';
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
