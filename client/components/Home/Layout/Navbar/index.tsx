@@ -159,14 +159,36 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setCategoriesVisible(true)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Open menu"
           >
-            <AiOutlineMenu size={24} />
+            <FiMenu size={24} className="text-gray-700" />
           </button>
         </div>
 
-        {/* Categories Navigation */}
-        <Categories />
+        {/* Categories Navigation - Only visible on desktop */}
+        <div className="hidden md:block border-t border-b border-gray-200">
+          <div className="flex justify-between items-center">
+            <Categories />
+            <div className="flex space-x-6 py-2">
+              {[
+                { name: 'Best Sellers', href: '/products?sort=best-sellers' },
+                { name: 'New Arrivals', href: '/products?filter=new-arrivals' },
+                { name: 'Special Offers', href: '/offers' },
+                { name: 'Brands', href: '/brands' },
+              ].map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="group relative text-sm font-medium text-gray-800 hover:text-primary-600"
+                >
+                  {item.name}
+                  <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary-600 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Categories Menu */}

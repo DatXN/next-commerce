@@ -14,19 +14,19 @@ import { CarouselProps, CarouselPropsDefault } from './carouselProps';
 
 import { CarouselArrow } from './Arrow';
 
-export default function Carousel(userProps: CarouselProps) {
-  const props: Required<CarouselProps> = {
-    ...CarouselPropsDefault,
-    ...userProps,
-  };
-
+export default function Carousel() {
   const carousel = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
-    ...props,
     dots: false,
-    beforeChange: (_: number, next: number) => setCurrentSlide(next),
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    beforeChange: (current: number, next: number) => setCurrentSlide(next),
   };
 
   return (
@@ -56,42 +56,25 @@ export default function Carousel(userProps: CarouselProps) {
         </Slider>
 
         {/* Info Panels */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20 px-4 max-w-full overflow-x-auto">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2 z-20 w-full max-w-[95%] justify-center">
           {carouselItems.map((item, index) => (
             <button
               key={index}
               onClick={() => carousel.current?.slickGoTo(index)}
-              className={`group relative w-[180px] h-[64px] overflow-hidden rounded-lg transition-all duration-200 flex-shrink-0
+              className={`group relative px-1 sm:px-2 md:px-4 py-1 sm:py-2 rounded-lg transition-all duration-200 flex-1 max-w-[24%]
                 ${
                   currentSlide === index
-                    ? 'ring-2 ring-green-600 scale-105'
-                    : 'ring-1 ring-white/50 hover:ring-white'
+                    ? 'bg-white text-black'
+                    : 'bg-black/40 text-white hover:bg-black/60'
                 }`}
             >
-              {/* Background Image */}
-              <div className="absolute inset-0">
-                <Image
-                  fill
-                  src={item.src}
-                  alt={item.alt}
-                  className="object-cover group-hover:scale-110 transition-transform duration-200"
-                  sizes="180px"
-                />
-                <div
-                  className={`absolute inset-0 bg-black/40 ${
-                    currentSlide === index
-                      ? 'bg-opacity-30'
-                      : 'group-hover:bg-opacity-30'
-                  }`}
-                />
-              </div>
-
-              {/* Text Content */}
-              <div className="relative p-2 text-left">
-                <h3 className="text-white text-sm font-medium line-clamp-2">
+              <div className="text-left">
+                <h3 className="text-[10px] sm:text-xs md:text-sm font-medium truncate">
                   {item.alt}
                 </h3>
-                <p className="text-white/80 text-xs mt-1">Shop Now</p>
+                <p className="text-[8px] sm:text-xs mt-0 sm:mt-1 opacity-80 hidden sm:block">
+                  Shop Now
+                </p>
               </div>
             </button>
           ))}

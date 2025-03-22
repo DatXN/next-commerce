@@ -118,6 +118,28 @@ input[type="number"] {
   transition: background-color 0.2s ease-in-out;
 }
 
+/* Megamenu transitions */
+.mega-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.mega-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.mega-menu-exit {
+  opacity: 1;
+}
+
+.mega-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms, transform 150ms;
+}
+
 /* Carousel Dots */
 .carousel .slick-dots {
   bottom: 20px;

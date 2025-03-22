@@ -14,7 +14,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <ScrollUp />
       <MobileNav />
       <main>
-        <div className="h-full w-full container mx-auto p-2">{children}</div>
+        <div className="h-full w-full container mx-auto">{children}</div>
       </main>
       <ToastContainer
         position="bottom-right"
