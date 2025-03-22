@@ -82,22 +82,38 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between py-4">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <div className="relative w-32 h-10 md:w-40 md:h-12">
-              <Image
-                fill
-                src="/assets/logo.png"
-                alt="Logo"
-                className="object-contain"
-                priority
-              />
-            </div>
-          </Link>
+        <div className="relative flex items-center justify-between py-4 h-20">
+          {/* Mobile Menu Button - Left side on mobile */}
+          <div className="md:hidden z-10 h-full flex items-center">
+            <button
+              onClick={() => setCategoriesVisible(true)}
+              className="flex items-center justify-center p-2 text-gray-700 hover:text-green-600"
+              aria-label="Open menu"
+            >
+              <FiMenu size={24} />
+            </button>
+          </div>
 
-          {/* Desktop Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-2xl mx-8">
+          {/* Logo - Center on mobile, left on desktop */}
+          <div className="flex-1 flex justify-center md:justify-start md:items-center h-full md:flex-initial md:w-[15%] lg:w-[12%]">
+            <Link
+              href="/"
+              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 md:relative md:left-auto md:top-auto md:transform-none flex-shrink-0"
+            >
+              <div className="relative w-32 h-10 md:w-36 md:h-11">
+                <Image
+                  fill
+                  src="/assets/logo.png"
+                  alt="Logo"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Search Bar - Hidden on mobile */}
+          <div className="hidden md:flex flex-1 flex-grow max-w-none md:w-[65%] lg:w-[75%] mx-2 md:mx-4 lg:mx-6">
             <div className="relative w-full">
               <input
                 type="text"
@@ -116,12 +132,12 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Right Navigation */}
-          <div className="flex items-center space-x-4 md:space-x-6">
+          {/* Right Navigation - On right for both mobile and desktop */}
+          <div className="flex items-center h-full space-x-4 md:space-x-4 z-10 md:flex-initial md:w-[20%] lg:w-[13%] md:justify-end">
             {authenticated ? (
               <Link
                 href="/profile"
-                className="flex flex-col items-center text-gray-700 hover:text-green-600"
+                className="flex flex-col items-center justify-center text-gray-700 hover:text-green-600"
               >
                 <AiOutlineUser size={24} />
                 <span className="text-xs hidden sm:inline">Account</span>
@@ -129,7 +145,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="flex flex-col items-center text-gray-700 hover:text-green-600"
+                className="flex flex-col items-center justify-center text-gray-700 hover:text-green-600"
               >
                 <AiOutlineUser size={24} />
                 <span className="text-xs hidden sm:inline">Sign In</span>
@@ -137,14 +153,14 @@ export default function Navbar() {
             )}
             <Link
               href="/favorites"
-              className="flex flex-col items-center text-gray-700 hover:text-green-600"
+              className="flex flex-col items-center justify-center text-gray-700 hover:text-green-600"
             >
               <AiOutlineHeart size={24} />
               <span className="text-xs hidden sm:inline">Favorites</span>
             </Link>
             <button
               onClick={openCart}
-              className="relative flex flex-col items-center text-gray-700 hover:text-green-600"
+              className="relative flex flex-col items-center justify-center text-gray-700 hover:text-green-600"
             >
               <AiOutlineShopping size={24} />
               <span className="text-xs hidden sm:inline">Cart</span>
@@ -155,15 +171,6 @@ export default function Navbar() {
               )}
             </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setCategoriesVisible(true)}
-            className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="Open menu"
-          >
-            <FiMenu size={24} className="text-gray-700" />
-          </button>
         </div>
 
         {/* Categories Navigation - Only visible on desktop */}
