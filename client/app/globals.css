@@ -117,3 +117,41 @@ input[type="number"] {
   background-color: rgba(0, 0, 0, 0.2);
   transition: background-color 0.2s ease-in-out;
 }
+
+/* Carousel Dots */
+.carousel .slick-dots {
+  bottom: 20px;
+  z-index: 20;
+}
+
+.carousel .slick-dots li button:before {
+  font-size: 12px;
+  color: white;
+  opacity: 0.7;
+}
+
+.carousel .slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+}
+
+/* Carousel Arrows */
+.carousel .slick-prev,
+.carousel .slick-next {
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+}
+
+.carousel .slick-prev {
+  left: 20px;
+}
+
+.carousel .slick-next {
+  right: 20px;
+}
+
+.carousel .slick-prev:before,
+.carousel .slick-next:before {
+  display: none;
+}

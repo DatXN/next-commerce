@@ -1,4 +1,4 @@
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 interface CarouselArrowProps {
   carousel: any;
@@ -7,7 +7,7 @@ interface CarouselArrowProps {
 
 export const CarouselArrow = ({ carousel, direction }: CarouselArrowProps) => {
   const handleSlick = () => {
-    if (direction === "left") {
+    if (direction === 'left') {
       carousel?.current?.slickPrev();
     } else {
       carousel?.current?.slickNext();
@@ -15,15 +15,23 @@ export const CarouselArrow = ({ carousel, direction }: CarouselArrowProps) => {
   };
 
   const arrowStyle =
-    "group absolute z-10 hidden md:flex justify-center items-center top-0 h-full cursor-pointer px-0";
+    'absolute z-10 flex justify-center items-center top-1/2 -translate-y-1/2 cursor-pointer ' +
+    (direction === 'left' ? 'left-6' : 'right-6');
 
   return (
-    <div
-      onClick={handleSlick}
-      className={arrowStyle + (direction === "left" ? " left-4" : " right-4")}
-    >
-      <div className="bg-white ring-1 group-hover:ring-black group-hover:bg-gray-100 group-hover:shadow-xl p-3 transition-all ease-linear">
-        {direction === "left" ? <AiOutlineLeft /> : <AiOutlineRight />}
+    <div onClick={handleSlick} className={arrowStyle}>
+      <div className="bg-white/80 hover:bg-white hover:shadow-lg rounded-full w-12 h-12 flex items-center justify-center transition-all duration-200 group">
+        {direction === 'left' ? (
+          <AiOutlineLeft
+            size={28}
+            className="text-gray-800 group-hover:scale-110 transition-transform"
+          />
+        ) : (
+          <AiOutlineRight
+            size={28}
+            className="text-gray-800 group-hover:scale-110 transition-transform"
+          />
+        )}
       </div>
     </div>
   );
