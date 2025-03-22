@@ -94,18 +94,70 @@ export default function Categories() {
   return (
     <div className="flex items-center h-full" onMouseLeave={handleMouseLeave}>
       <div className="flex h-full space-x-6">
-        <div className="flex items-center">
-          <Link
-            href="/products"
-            className="group relative flex items-center py-3 text-sm font-bold text-primary-600 hover:text-primary-700"
-          >
-            All Categories
-            <ChevronDownIcon
-              className="ml-1 h-4 w-4 flex-none"
-              aria-hidden="true"
-            />
-            <span className="absolute bottom-0 left-0 h-0.5 w-full bg-primary-600"></span>
-          </Link>
+        <div
+          className="flex"
+          onMouseEnter={() => handleMouseEnter('All Categories')}
+        >
+          <div className="relative flex items-center">
+            <Link
+              href="/products"
+              className="group relative flex items-center py-3 text-sm font-bold text-primary-600 hover:text-primary-700"
+            >
+              All Categories
+              <ChevronDownIcon
+                className="ml-1 h-4 w-4 flex-none"
+                aria-hidden="true"
+              />
+              <span className="absolute bottom-0 left-0 h-0.5 w-full bg-primary-600"></span>
+            </Link>
+          </div>
+
+          {/* All Categories Mega Menu Panel */}
+          {activeCategory === 'All Categories' && (
+            <div className="absolute inset-x-0 top-full text-gray-500 sm:text-sm z-50 bg-white">
+              {/* Presentational element used to render the bottom shadow */}
+              <div
+                className="absolute inset-0 top-1/2 bg-white shadow"
+                aria-hidden="true"
+              />
+
+              <div className="relative bg-white">
+                <div className="mx-auto max-w-7xl px-8">
+                  <div className="grid grid-cols-1 items-start gap-x-8 gap-y-10 pb-12 pt-10 md:grid-cols-3 lg:gap-x-16">
+                    {categories.map((category) => (
+                      <div
+                        key={category.name}
+                        className="grid grid-cols-1 gap-y-6"
+                      >
+                        <div>
+                          <div className="font-medium text-gray-900">
+                            {category.name}
+                          </div>
+                          <div className="mt-4 border-t border-gray-200 pt-6">
+                            <div className="grid grid-cols-1 gap-y-3">
+                              {category.subcategories.map((subcategory) => (
+                                <div
+                                  key={subcategory.name}
+                                  className="group relative"
+                                >
+                                  <Link
+                                    href={subcategory.href}
+                                    className="text-sm text-gray-800 hover:text-green-600"
+                                  >
+                                    {subcategory.name}
+                                  </Link>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {categories.map((category) => (
